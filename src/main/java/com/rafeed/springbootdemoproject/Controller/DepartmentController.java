@@ -25,6 +25,11 @@ public class DepartmentController {
         return departmentService.getDepartmentById(departmentId);
     }
 
+    @GetMapping("/getDepartmentByName")
+    public Department getDepartmentByName(@RequestParam String departmentName){
+        return departmentService.getDepartmentByName(departmentName);
+    }
+
     @PostMapping("/saveDepartment")
     public Department saveDepartment(@RequestBody Department department){
         return departmentService.saveDepartment(department);
