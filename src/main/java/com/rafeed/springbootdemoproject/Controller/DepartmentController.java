@@ -1,6 +1,7 @@
 package com.rafeed.springbootdemoproject.Controller;
 
 import com.rafeed.springbootdemoproject.Entity.Department;
+import com.rafeed.springbootdemoproject.Exceptions.DepartmentNotFoundException;
 import com.rafeed.springbootdemoproject.Service.DepartmentService;
 import com.rafeed.springbootdemoproject.ServiceImplementation.DepartmentServiceImplementation;
 import org.slf4j.Logger;
@@ -26,7 +27,7 @@ public class DepartmentController {
     }
 
     @GetMapping("/getDepartment")
-    public Department getDepartmentById(@RequestParam int departmentId){
+    public Department getDepartmentById(@RequestParam int departmentId) throws DepartmentNotFoundException {
         return departmentService.getDepartmentById(departmentId);
     }
 

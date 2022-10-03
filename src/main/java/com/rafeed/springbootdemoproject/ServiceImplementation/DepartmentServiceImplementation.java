@@ -1,6 +1,7 @@
 package com.rafeed.springbootdemoproject.ServiceImplementation;
 
 import com.rafeed.springbootdemoproject.Entity.Department;
+import com.rafeed.springbootdemoproject.Exceptions.DepartmentNotFoundException;
 import com.rafeed.springbootdemoproject.Repository.DepartmentRepository;
 import com.rafeed.springbootdemoproject.Service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class DepartmentServiceImplementation implements DepartmentService {
@@ -26,8 +28,12 @@ public class DepartmentServiceImplementation implements DepartmentService {
     }
 
     @Override
-    public Department getDepartmentById(int departmentId) {
-        return departmentRepository.getDepartmentByDepartmentId(departmentId);
+    public Department getDepartmentById(int departmentId) throws DepartmentNotFoundException {
+        Optional<Department> department = departmentRepository.findById(departmentId);
+        if(!department.isPresent()){
+            throw new DepartmentNotFoundException("Department Not Found!");
+        }
+        return department.get();
     }
 
     @Override
