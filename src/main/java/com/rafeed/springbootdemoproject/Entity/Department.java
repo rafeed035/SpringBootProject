@@ -1,6 +1,7 @@
 package com.rafeed.springbootdemoproject.Entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Department {
@@ -24,6 +25,9 @@ public class Department {
     @Column(
             name = "department_name",
             nullable = false
+    )
+    @NotBlank(
+            message = "Please add Department Name"
     )
     private String departmentName;
 

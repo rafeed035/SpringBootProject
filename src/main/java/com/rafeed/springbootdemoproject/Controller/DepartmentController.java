@@ -3,9 +3,12 @@ package com.rafeed.springbootdemoproject.Controller;
 import com.rafeed.springbootdemoproject.Entity.Department;
 import com.rafeed.springbootdemoproject.Service.DepartmentService;
 import com.rafeed.springbootdemoproject.ServiceImplementation.DepartmentServiceImplementation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -14,6 +17,8 @@ public class DepartmentController {
 
     @Autowired
     private DepartmentService departmentService;
+
+    private final Logger LOGGER = LoggerFactory.getLogger(DepartmentController.class);
 
     @GetMapping("/AllDepartments")
     public List<Department> getAllDepartments(){
@@ -31,7 +36,8 @@ public class DepartmentController {
     }
 
     @PostMapping("/saveDepartment")
-    public Department saveDepartment(@RequestBody Department department){
+    public Department saveDepartment(@Valid @RequestBody Department department){
+        LOGGER.info("Inside saveDepartment of DepartmentController");
         return departmentService.saveDepartment(department);
     }
 
