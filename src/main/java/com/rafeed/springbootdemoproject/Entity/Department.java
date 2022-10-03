@@ -14,7 +14,6 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @Builder
 public class Department {
-
     @Id
     @Column(
             name = "department_id",

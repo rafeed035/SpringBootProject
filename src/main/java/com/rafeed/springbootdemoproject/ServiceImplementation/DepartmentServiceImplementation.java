@@ -53,7 +53,6 @@ public class DepartmentServiceImplementation implements DepartmentService {
                 !"".equalsIgnoreCase(department.getDepartmentCode())){
             departmentUpdate.setDepartmentCode(department.getDepartmentCode());
         }
-
         return departmentRepository.save(departmentUpdate);
     }
 
@@ -61,6 +60,4 @@ public class DepartmentServiceImplementation implements DepartmentService {
     public Department getDepartmentByName(String departmentName) {
         return departmentRepository.findByDepartmentNameIgnoreCase(departmentName);
     }
-
-
 }
