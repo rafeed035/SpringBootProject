@@ -5,12 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
-import java.net.http.HttpRequest;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ErrorMessage {
-    private HttpStatus status;
+public class CourseErrorMessage {
+    private HttpStatus httpStatus;
     private String message;
 }

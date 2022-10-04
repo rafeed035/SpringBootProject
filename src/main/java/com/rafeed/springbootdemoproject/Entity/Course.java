@@ -13,42 +13,38 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Department {
+public class Course {
     @Id
     @Column(
-            name = "department_id",
+            name = "course_id",
             nullable = false
     )
     @SequenceGenerator(
-            name = "department_id_sequence",
-            sequenceName = "department_id_sequence",
+            name = "course_id_sequence",
+            sequenceName = "course_id_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
-            generator = "department_id_sequence",
+            generator = "course_id_sequence",
             strategy = GenerationType.SEQUENCE
     )
-    private int departmentId;
+    private int courseId;
 
     @Column(
-            name = "department_name",
+            name = "course_name",
             nullable = false,
             unique = true
     )
     @NotBlank(
-            message = "Please add Department Name"
+            message = "Please add course name"
     )
-    private String departmentName;
+    private String courseName;
 
-    @Column(
-            name = "department_address",
-            nullable = false
+    @ManyToOne(
     )
-    private String departmentAddress;
-
-    @Column(
-            name = "department_code",
-            nullable = false
+    @JoinColumn(
+            name = "department_id",
+            referencedColumnName = "department_id"
     )
-    private String departmentCode;
+    private Department department;
 }
