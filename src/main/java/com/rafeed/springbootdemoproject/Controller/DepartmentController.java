@@ -18,7 +18,6 @@ public class DepartmentController {
 
     @Autowired
     private DepartmentService departmentService;
-
     private final Logger LOGGER = LoggerFactory.getLogger(DepartmentController.class);
 
     @GetMapping("/AllDepartments")

@@ -39,16 +39,4 @@ public class Department {
             message = "Please add Department Name"
     )
     private String departmentName;
-
-    @Column(
-            name = "department_address",
-            nullable = false
-    )
-    private String departmentAddress;
-
-    @Column(
-            name = "department_code",
-            nullable = false
-    )
-    private String departmentCode;
 }

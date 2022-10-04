@@ -19,7 +19,14 @@ public class DepartmentServiceImplementation implements DepartmentService {
 
     @Override
     public Department saveDepartment(Department department) {
-        return departmentRepository.save(department);
+        Department checkDepartment = departmentRepository.findByDepartmentNameIgnoreCase(department.getDepartmentName());
+        if(checkDepartment != null){
+            System.out.println("\nDepartment already exists!!!");
+        }
+        else{
+            checkDepartment = departmentRepository.save(department);
+        }
+        return checkDepartment;
     }
 
     @Override
@@ -48,16 +55,6 @@ public class DepartmentServiceImplementation implements DepartmentService {
         if(Objects.nonNull(department.getDepartmentName()) &&
                 !"".equalsIgnoreCase(department.getDepartmentName())){
             departmentUpdate.setDepartmentName(department.getDepartmentName());
-        }
-
-        if(Objects.nonNull(department.getDepartmentAddress()) &&
-                !"".equalsIgnoreCase(department.getDepartmentAddress())){
-            departmentUpdate.setDepartmentAddress(department.getDepartmentAddress());
-        }
-
-        if(Objects.nonNull(department.getDepartmentCode()) &&
-                !"".equalsIgnoreCase(department.getDepartmentCode())){
-            departmentUpdate.setDepartmentCode(department.getDepartmentCode());
         }
         return departmentRepository.save(departmentUpdate);
     }
