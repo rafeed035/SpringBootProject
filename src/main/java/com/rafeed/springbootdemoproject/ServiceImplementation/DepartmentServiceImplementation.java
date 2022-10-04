@@ -14,11 +14,15 @@ import java.util.Optional;
 @Service
 public class DepartmentServiceImplementation implements DepartmentService {
 
-    @Autowired
     private DepartmentRepository departmentRepository;
+
+    public DepartmentServiceImplementation(DepartmentRepository departmentRepository) {
+        this.departmentRepository = departmentRepository;
+    }
 
     @Override
     public Department saveDepartment(Department department) {
+        //check whether the department exists or not
         Department checkDepartment = departmentRepository.findByDepartmentNameIgnoreCase(department.getDepartmentName());
         if(checkDepartment != null){
             System.out.println("\nDepartment already exists!!!");
@@ -44,23 +48,43 @@ public class DepartmentServiceImplementation implements DepartmentService {
     }
 
     @Override
-    public void deleteDepartment(int departmentId) {
-        departmentRepository.deleteById(departmentId);
-    }
-
-    @Override
-    public Department updateDepartment(int departmentId, Department department) {
-        Department departmentUpdate = departmentRepository.getDepartmentByDepartmentId(departmentId);
-
-        if(Objects.nonNull(department.getDepartmentName()) &&
-                !"".equalsIgnoreCase(department.getDepartmentName())){
-            departmentUpdate.setDepartmentName(department.getDepartmentName());
+    public void deleteDepartment(int departmentId) throws DepartmentNotFoundException {
+        //check whether the department exists or not
+        Department deleteDepartment = departmentRepository.getDepartmentByDepartmentId(departmentId);
+        if(deleteDepartment == null){
+            throw new DepartmentNotFoundException("Department Not Found!");
         }
-        return departmentRepository.save(departmentUpdate);
+        else{
+            departmentRepository.delete(deleteDepartment);
+        }
     }
 
     @Override
-    public Department getDepartmentByName(String departmentName) {
-        return departmentRepository.findByDepartmentNameIgnoreCase(departmentName);
+    public Department updateDepartment(int departmentId, Department department) throws DepartmentNotFoundException {
+
+        //check whether the department exists or not
+        Department departmentCheck = departmentRepository.getDepartmentByDepartmentId(departmentId);
+
+        if(departmentCheck != null){
+            if(Objects.nonNull(department.getDepartmentName()) &&
+                    !"".equalsIgnoreCase(department.getDepartmentName())){
+                departmentCheck.setDepartmentName(department.getDepartmentName());
+            }
+        }
+        else{
+            throw new DepartmentNotFoundException("Department Not Found!");
+        }
+
+        return departmentRepository.save(departmentCheck);
+    }
+
+    @Override
+    public Department getDepartmentByName(String departmentName) throws DepartmentNotFoundException {
+        //check whether the department exists or not
+        Department department = departmentRepository.findByDepartmentNameIgnoreCase(departmentName);
+        if(department == null){
+            throw new DepartmentNotFoundException("Department not found!!!");
+        }
+        return department;
     }
 }

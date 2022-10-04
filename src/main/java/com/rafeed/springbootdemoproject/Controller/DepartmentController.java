@@ -31,7 +31,7 @@ public class DepartmentController {
     }
 
     @GetMapping("/getDepartmentByName")
-    public Department getDepartmentByName(@RequestParam String departmentName){
+    public Department getDepartmentByName(@RequestParam String departmentName) throws DepartmentNotFoundException {
         return departmentService.getDepartmentByName(departmentName);
     }
 
@@ -42,14 +42,14 @@ public class DepartmentController {
     }
 
     @DeleteMapping("/deleteDepartment")
-    public String deleteDepartment(@RequestParam int departmentId){
+    public String deleteDepartment(@RequestParam int departmentId) throws DepartmentNotFoundException {
         departmentService.deleteDepartment(departmentId);
         return "deleted successfully";
     }
 
     @PutMapping("/updateDepartment")
     public Department updateDepartment(@RequestParam int departmentId,
-                                       @RequestBody Department department){
+                                       @RequestBody Department department) throws DepartmentNotFoundException {
        return departmentService.updateDepartment(departmentId, department);
     }
 

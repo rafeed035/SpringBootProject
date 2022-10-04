@@ -9,7 +9,7 @@ public interface DepartmentService {
     Department saveDepartment(Department department);
     List<Department> getAllDepartments();
     Department getDepartmentById(int departmentId) throws DepartmentNotFoundException;
-    void deleteDepartment(int departmentId);
-    Department updateDepartment(int departmentId, Department department);
-    Department getDepartmentByName(String departmentName);
+    void deleteDepartment(int departmentId) throws DepartmentNotFoundException;
+    Department updateDepartment(int departmentId, Department department) throws DepartmentNotFoundException;
+    Department getDepartmentByName(String departmentName) throws DepartmentNotFoundException;
 }
