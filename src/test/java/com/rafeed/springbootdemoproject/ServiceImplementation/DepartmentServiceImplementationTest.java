@@ -58,8 +58,5 @@ class DepartmentServiceImplementationTest {
         Department departmentFound = departmentRepository.getDepartmentByDepartmentId(id);
 
         assertEquals(id, departmentFound.getDepartmentId());
-
     }
-
-
 }
